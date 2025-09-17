@@ -15,8 +15,83 @@ const Home = () => {
 
                 <fieldset>
                     <legend>About Project</legend>
-                    <div>
+                    <div className='para'>
                         Personal Finance Dashboard is a fast, privacy-first budgeting app built with React + styled-components. Plan envelopes, track transactions, visualize spend, and import/export CSV-all offline, no backend, your data stays on your device.
+                    </div>
+                    <div className="points">
+                        <ul className='mainList'>
+                            <li className='listBlock'>
+                                <h2 className='heading'>What this is</h2>
+                                <ul>
+                                    <li>A fast, frontend-only personal finance dashboard built with React + styled-components.</li>
+                                    <li>Privacy-first: no backend; all data lives in your browser’s localStorage.</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>Core modules</h2>
+                                <ul>
+                                    <li>Overview: KPIs (Total Balance, Month Spend, Month Income, Net Cash Flow, Remaining Budget/Overspent) + charts.</li>
+                                    <li>Transactions: add income/expense, view/filter/sort ledger, month navigation, totals, CSV export.</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>Highlights</h2>
+                                <ul>
+                                    <li>Add transactions (account + optional envelope & note).</li>
+                                    <li>Delete with Undo and Clear month with Undo (react-toastify).</li>
+                                    <li>Search & filters: text search, type (income/expense), account, envelope.</li>
+                                    <li>Column sorting: date / type / account / envelope / amount.</li>
+                                    <li>Totals row: shows income, expense and net for current filters.</li>
+                                    <li>Month navigation: prev/next + Month/Year selects (timezone-safe).</li>
+                                    <li>Charts: daily Income vs Expense (area), Top spending categories (bar).</li>
+                                    <li>Sticky table headers, responsive layout, keyboard-friendly modals.</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>Data & logic</h2>
+                                <ul>
+                                    <li>Transactions use positive amounts for income and negative for expenses.</li>
+                                    <li>KPIs are computed per selected month; Remaining Budget = Σ(envelope budgets) − month expense (can go negative = Overspent).</li>
+                                    <li>Everything is persisted to localStorage; refresh-safe and works offline.</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>Tech stack</h2>
+                                <ul>
+                                    <li>React 18, Vite, styled-components, React Router 6</li>
+                                    <li>Recharts (charts), react-toastify (toasts), react-icons (icons)</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>CSV</h2>
+                                <ul>
+                                    <li>Export transactions for the selected month (one click).</li>
+                                    <li>(Import planned in roadmap.)</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>Deployment</h2>
+                                <ul>
+                                    <li>Optimized for GitHub Pages; router uses a base path for clean deep links.</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>Roadmap (next)</h2>
+                                <ul>
+                                    <li>CSV import with preview/mapping</li>
+                                    <li>Transfers and account balances timeline</li>
+                                    <li>Envelope funding & carryover options</li>
+                                    <li>Settings (currency/locale, theme), Backup/Restore JSON</li>
+                                    <li>Virtualized ledger for very large datasets</li>
+                                </ul>
+                            </li>
+                            <li className='listBlock'>
+                                <h2 className='heading'>How to start</h2>
+                                <ul>
+                                    <li>Pick a month → Add Transaction → explore filters/sort → view KPIs & charts → Export CSV if needed.</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </fieldset>
 

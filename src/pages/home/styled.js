@@ -20,10 +20,31 @@ export const Styled = {
                 font-size: 16px;
                 color: #64493d;
             }
-            p {
+            .para {
                 display: block;
                 margin-bottom: 15px;
                 max-width: 900px;
+            }
+            .points {
+                margin-top: 30px;
+                margin-bottom: 30px;
+
+                ul.mainList {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 50px;
+                    margin-left: 30px;
+                    list-style: none;
+
+                    li.listBlock {
+                        /* border: 1px solid #f00; */
+                        max-width: 45%;
+
+                        .heading {
+                            text-decoration: underline;
+                        }
+                    }
+                }
             }
         }
     `,
