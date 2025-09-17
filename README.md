@@ -29,3 +29,23 @@ npm i
 # 3) Start dev server
 npm run dev
 ```
+
+## Home
+
+![alt text](image.png)
+
+## Overview
+
+![alt text](image-1.png)
+
+## Transactions
+
+![alt text](image-2.png)
+
+## Accounts
+
+![alt text](image-3.png)
+
+## Envelopes
+
+![alt text](image-4.png)
