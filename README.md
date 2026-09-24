@@ -1,76 +1,36 @@
-# Personal Finance Dashboard
+﻿# Personal Finance Dashboard
 
-A fast **frontend-only** money tracker built with **React + styled-components**.  
-Add income/expenses, see KPIs & charts, filter/sort the ledger, export CSV — all saved in **localStorage**.
+A responsive frontend-only finance dashboard built with React. Track transactions, review monthly KPIs, manage accounts and envelopes, view charts, and export CSV data while keeping state in browser storage.
 
----
+![Personal Finance Dashboard preview](screenshot.png)
 
 ## Features
 
--   **Overview:** Total Balance, This Month Spend/Income, Net Cash Flow, Remaining Budget/Overspent.
--   **Charts:** Daily Income vs Expense (area), Top Categories (bar) with month navigation.
--   **Transactions:** add income/expense, search, quick filters (type/account/envelope), column sorting, totals row.
--   **Undo toasts:** delete + clear month both support **Undo** (react-toastify).
--   **CSV export** for the selected month.
--   **Routing** (React Router), lazy pages, sticky table headers, responsive layout.
+- Monthly overview with balance, income, expense, net cash flow, and budget KPIs
+- Income and expense charts with month navigation
+- Transaction search, filters, sorting, totals, delete undo, and CSV export
+- Account and envelope management with local persistence
+- Responsive fixed header, independent navigation panel, active-link scrolling, and icon-only footer links
 
----
+## Tech stack
 
-## Clone & Run
+React, Vite, React Router, styled-components, Material UI, Recharts, Zustand, Dexie, and LocalStorage.
+
+## Run locally
 
 ```bash
-# 1) Clone
-git clone https://github.com/a2rp/personal-finance-dashboard.git
-cd personal-finance-dashboard
-
-# 2) Install deps
-npm i
-
-# 3) Start dev server
+npm install
 npm run dev
 ```
 
-## Home
+Run `npm run lint` and `npm run build` before publishing. Deploy with `npm run deploy`.
 
-![alt text](image.png)
+Live URL: [a2rp.github.io/personal-finance-dashboard](https://a2rp.github.io/personal-finance-dashboard/)
 
-## Overview
-
-![alt text](image-1.png)
-
-## Transactions
-
-![alt text](image-2.png)
-
-## Accounts
-
-![alt text](image-3.png)
-
-## Envelopes
-
-![alt text](image-4.png)
+All data stays in the browser. This project has no backend.
 
 ## Links
 
-- Portfolio: [https://www.ashishranjan.net](https://www.ashishranjan.net)
-- GitHub: [https://github.com/a2rp](https://github.com/a2rp)
-- CodePen: [https://codepen.io/ash1198](https://codepen.io/ash1198)
-- LinkedIn: [https://www.linkedin.com/in/aashishranjan](https://www.linkedin.com/in/aashishranjan)
-- Facebook: [https://www.facebook.com/theash.ashish/](https://www.facebook.com/theash.ashish/)
-- YouTube: [https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1](https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1)
-- Email: [ash.ranjan09@gmail.com](mailto:ash.ranjan09@gmail.com)
-
-## Support
-
-- Support: [https://a2rp-donation-page.netlify.app/](https://a2rp-donation-page.netlify.app/)
-- Buy Me A Coffee: [https://buymeacoffee.com/a2rp](https://buymeacoffee.com/a2rp)
-- Patreon: [https://patreon.com/a2rp](https://patreon.com/a2rp)
-<!-- Project links -->
-
-## Links
-
-- Live: [https://a2rp.github.io/personal-finance-dashboard/](https://a2rp.github.io/personal-finance-dashboard/)
-- Repository: [https://github.com/a2rp/personal-finance-dashboard](https://github.com/a2rp/personal-finance-dashboard)
 - Portfolio: [https://www.ashishranjan.net/](https://www.ashishranjan.net/)
 - GitHub: [https://github.com/a2rp](https://github.com/a2rp)
 - CodePen: [https://codepen.io/ash1198](https://codepen.io/ash1198)
@@ -83,4 +43,4 @@ npm run dev
 
 - Support: [https://a2rp-donation-page.netlify.app/](https://a2rp-donation-page.netlify.app/)
 - Buy Me a Coffee: [https://buymeacoffee.com/a2rp](https://buymeacoffee.com/a2rp)
-- Patreon: [https://www.patreon.com/a2rp](https://www.patreon.com/a2rp)
+- Patreon: [https://patreon.com/a2rp](https://patreon.com/a2rp)

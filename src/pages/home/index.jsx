@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Col1, Col2, Row, Styled } from './styled'
 import { FaFacebook, FaGithub, FaLinkedin, FaPhoneAlt, FaUser, FaYoutube } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
@@ -24,7 +24,7 @@ const Home = () => {
                                 <h2 className='heading'>What this is</h2>
                                 <ul>
                                     <li>A fast, frontend-only personal finance dashboard built with React + styled-components.</li>
-                                    <li>Privacy-first: no backend; all data lives in your browser’s localStorage.</li>
+                                    <li>Privacy-first: no backend; all data lives in your browser's localStorage.</li>
                                 </ul>
                             </li>
                             <li className='listBlock'>
@@ -51,7 +51,7 @@ const Home = () => {
                                 <h2 className='heading'>Data & logic</h2>
                                 <ul>
                                     <li>Transactions use positive amounts for income and negative for expenses.</li>
-                                    <li>KPIs are computed per selected month; Remaining Budget = Σ(envelope budgets) − month expense (can go negative = Overspent).</li>
+                                    <li>KPIs are computed per selected month; Remaining Budget equals total envelope budgets minus monthly expense and can become Overspent.</li>
                                     <li>Everything is persisted to localStorage; refresh-safe and works offline.</li>
                                 </ul>
                             </li>
@@ -88,7 +88,7 @@ const Home = () => {
                             <li className='listBlock'>
                                 <h2 className='heading'>How to start</h2>
                                 <ul>
-                                    <li>Pick a month → Add Transaction → explore filters/sort → view KPIs & charts → Export CSV if needed.</li>
+                                    <li>Pick a month, add a transaction, explore filters, review KPIs, and export CSV when needed.</li>
                                 </ul>
                             </li>
                         </ul>
@@ -204,4 +204,3 @@ const Home = () => {
 }
 
 export default Home
-

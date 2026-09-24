@@ -1,4 +1,4 @@
-// src/pages/overview/index.jsx
+﻿// src/pages/overview/index.jsx
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Styled } from "./styled";
@@ -42,7 +42,7 @@ export default function Overview() {
     const nextMonth = () => shiftMonth(1);
 
     // pull current state once per version tick
-    const state = useMemo(() => getState(), [version]);
+    const state = useMemo(() => { void version; return getState(); }, [version]);
     const { settings = {}, envelopes = [], transactions = [], accounts = [] } = state;
     const { currency = "INR", locale = "en-IN" } = settings;
 
@@ -83,7 +83,7 @@ export default function Overview() {
     }, [transactions]);
 
     // KPIs
-    const k = useMemo(() => kpisForMonth(month), [version, month]);
+    const k = useMemo(() => { void version; return kpisForMonth(month); }, [version, month]);
     const rem = k.remainingBudget ?? 0;
     const net = (k.income || 0) - (k.expense || 0);
 
@@ -184,7 +184,7 @@ export default function Overview() {
             <Styled.HeaderBar>
                 <div>
                     <Styled.Title>Personal Finance Dashboard</Styled.Title>
-                    <Styled.Subtitle>Overview — {monthLabel}</Styled.Subtitle>
+                    <Styled.Subtitle>Overview - {monthLabel}</Styled.Subtitle>
                 </div>
 
                 <Styled.Actions>
@@ -198,7 +198,7 @@ export default function Overview() {
                             marginRight: 12,
                         }}
                     >
-                        <Styled.Button type="button" variant="ghost" onClick={prevMonth} aria-label="Previous month">‹</Styled.Button>
+                        <Styled.Button type="button" variant="ghost" onClick={prevMonth} aria-label="Previous month">Prev</Styled.Button>
 
                         <div style={{ display: "inline-flex", gap: 8 }}>
                             <select
@@ -241,15 +241,15 @@ export default function Overview() {
                             </select>
                         </div>
 
-                        <Styled.Button type="button" variant="ghost" onClick={nextMonth} aria-label="Next month">›</Styled.Button>
+                        <Styled.Button type="button" variant="ghost" onClick={nextMonth} aria-label="Next month">Next</Styled.Button>
                     </div>
 
                     {/* Quick actions */}
                     <Styled.Button variant="primary" onClick={() => navigate("/transactions")}>
                         New Transaction
                     </Styled.Button>
-                    <Styled.Button variant="ghost" onClick={addSampleIncome}>+ Add ₹1,000 Income</Styled.Button>
-                    <Styled.Button variant="ghost" onClick={addSampleExpense}>+ Add -₹200 Expense</Styled.Button>
+                    <Styled.Button variant="ghost" onClick={addSampleIncome}>+ Add INR 1,000 Income</Styled.Button>
+                    <Styled.Button variant="ghost" onClick={addSampleExpense}>+ Add -INR 200 Expense</Styled.Button>
                 </Styled.Actions>
             </Styled.HeaderBar>
 
@@ -308,9 +308,25 @@ export default function Overview() {
 
             <Styled.Grid columns={1}>
                 <Styled.Card>
-                    <Styled.CardHeader>Recent Activity</Styled.CardHeader>
-                    {/* (unchanged list) */}
-                    {/* ... */}
+                                        <Styled.CardHeader>Recent Activity</Styled.CardHeader>
+                    {recent.length > 0 ? (
+                        <Styled.RecentList>
+                            {recent.map((item) => {
+                                const amount = Number(item.amount) || 0;
+                                const type = item.type || (amount >= 0 ? "income" : "expense");
+                                return (
+                                    <li key={item.id}>
+                                        <span className="date">{item.date}</span>
+                                        <span className="note">{item.note || "Untitled transaction"}</span>
+                                        <span className="meta">{accName[item.accountId] || "No account"} / {envName[item.envelopeId] || "No envelope"}</span>
+                                        <span className="amt" data-negative={type === "expense"}>{fmt(amount)}</span>
+                                    </li>
+                                );
+                            })}
+                        </Styled.RecentList>
+                    ) : (
+                        <Styled.Placeholder>No transactions for this month</Styled.Placeholder>
+                    )}
                 </Styled.Card>
             </Styled.Grid>
         </Styled.Page>

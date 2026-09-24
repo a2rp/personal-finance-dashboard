@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-const maxw = "1080px";
+﻿import styled from "styled-components";
 
 export const Styled = {
     Wrapper: styled.div`

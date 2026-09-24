@@ -1,4 +1,4 @@
-// src/data/db.js
+﻿// src/data/db.js
 import Dexie from "dexie";
 
 // --- DB instance ---
@@ -23,7 +23,7 @@ const uid = () =>
 
 /**
  * Initialize defaults on first run.
- * Safe to call multiple times—does nothing if already initialized.
+ * Safe to call multiple times-does nothing if already initialized.
  */
 export async function initDb() {
     // settings row ensures one-time init
@@ -78,7 +78,7 @@ export async function initDb() {
 
     // Expose for debugging in dev
     if (import.meta.env?.DEV) {
-        // eslint-disable-next-line no-console
+
         console.log("[pfd] Dexie ready");
         // @ts-ignore
         window.db = db;

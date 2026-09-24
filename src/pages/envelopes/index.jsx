@@ -1,4 +1,4 @@
-// src/pages/envelopes/index.jsx
+﻿// src/pages/envelopes/index.jsx
 import { useMemo, useState } from "react";
 import { Styled } from "./styled";
 import Modal from "../../components/modal/index.jsx";
@@ -11,7 +11,7 @@ export default function Envelopes() {
     const month = monthNow();
 
     // read state
-    const state = useMemo(() => getState(), [version]);
+    const state = useMemo(() => { void version; return getState(); }, [version]);
     const { envelopes = [], transactions = [], settings = {} } = state;
     const { currency = "INR", locale = "en-IN" } = settings;
 
@@ -135,7 +135,7 @@ export default function Envelopes() {
             <Styled.HeaderBar>
                 <div>
                     <Styled.Title>Envelopes</Styled.Title>
-                    <Styled.Subtitle>Budgets — {monthLabel}</Styled.Subtitle>
+                    <Styled.Subtitle>Budgets - {monthLabel}</Styled.Subtitle>
                 </div>
                 <Styled.Actions>
                     <Styled.Button variant="primary" onClick={openNew}>New Envelope</Styled.Button>
@@ -208,10 +208,10 @@ export default function Envelopes() {
                                 <tr>
                                     <td><Styled.ColorDot color="#9aa0a6" />Uncategorized</td>
                                     <td></td>
-                                    <td style={{ textAlign: "right" }}>—</td>
+                                    <td style={{ textAlign: "right" }}>-</td>
                                     <td style={{ textAlign: "right" }}>{fmt(uncatSpent)}</td>
-                                    <td style={{ textAlign: "right" }}>—</td>
-                                    <td>—</td>
+                                    <td style={{ textAlign: "right" }}>-</td>
+                                    <td>-</td>
                                     <td></td>
                                 </tr>
                             )}

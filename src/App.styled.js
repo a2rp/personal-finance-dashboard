@@ -1,167 +1,85 @@
-import styled, { css } from "styled-components";
-
-/* ---- Hover scrollbar with NO layout shift ----
-   - Width is constant (12px), so content never moves.
-   - Thumb fades from transparent → visible on hover.
-   - scrollbar-gutter keeps layout stable in supporting browsers.
-   - Works in Chromium/Safari (WebKit) + Firefox.
-*/
-const hoverScrollbarStable = css`
-    /* Reserve space so nothing shifts */
-    scrollbar-gutter: stable;
-
-    /* Firefox: keep width thin, color transparent by default */
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-
-    /* WebKit: fixed width always; invisible by default */
-    &::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
-    }
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: transparent; /* hidden look */
-        border-radius: 8px;
-        border: 3px solid transparent; /* inset effect */
-        background-clip: content-box;
-    }
-
-    /* On hover: only change colors / opacity, not width */
-    @media (hover: hover) {
-        &:hover {
-            scrollbar-color: #666 transparent; /* Firefox thumb color */
-        }
-        &:hover::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #3a3a3a, #666);
-        }
-        &::-webkit-scrollbar-thumb:hover {
-            background: #808080;
-        }
-    }
-
-    /* Touch devices: keep a visible thin thumb for usability */
-    @media (hover: none) {
-        scrollbar-width: thin;
-        scrollbar-color: #555 transparent;
-        &::-webkit-scrollbar-thumb {
-            background: #555;
-        }
-    }
-`;
-
-const Wrapper = styled.div`
-    position: relative;
-`;
-
-const Header = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background-color: #010409;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    padding: 15px;
-    border-bottom: 1px solid #333;
-`;
-
-const NavLinkWrapper = styled.div`
-    box-shadow: 0 0 1px 1px #333 inset;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const Heading = styled.h1`
-    font-size: 14px;
-    a {
-        color: #aaa;
-        text-decoration: none;
-        padding: 2px;
-        &:hover {
-            border-bottom: 1px solid #aaa;
-        }
-    }
-`;
-
-const Main = styled.div`
-    height: 100vh;
-    padding-top: 70px;
-    display: flex;
-    align-items: stretch;
-    overflow: hidden;
-`;
-
-const NavWrapper = styled.div`
-    box-shadow: 0 0 1px 1px #333 inset;
-    width: 0;
-    flex: 0 0 0;
-    transition: 0.2s ease;
-    transition-property: width, flex;
-    overflow: hidden;
-    z-index: 9999;
-    background-color: #000;
-
-    &.active {
-        flex: 0 0 250px;
-        width: 250px;
-    }
-
-    @media (width < 1000px) {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        height: calc(100vh - 70px);
-    }
-
-    .navInner {
-        width: 250px;
-        height: 100%;
-        overflow-y: auto;
-        ${hoverScrollbarStable}; /* ← updated mixin here */
-        padding: 15px;
-    }
-`;
-
-const Tuts = styled.div``;
-
-const ContentWrapper = styled.div`
-    box-shadow: 0 0 1px 1px #333 inset;
-    width: 100%;
-    overflow: auto;
-    /* padding: 15px; */
-    scroll-behavior: smooth !important;
-    ${hoverScrollbarStable};
-`;
-
-const RoutesWrapper = styled.div`
-    min-height: 100vh;
-    /* border: 1px solid #f00; */
-`;
-
-const Footer = styled.div`
-    padding: 15px;
-`;
+﻿import styled from "styled-components";
 
 export const Styled = {
-    Wrapper,
-    Header,
-    NavLinkWrapper,
-    Heading,
-    Main,
-    ContentWrapper,
-    RoutesWrapper,
-    NavWrapper,
-    Tuts,
-    Footer,
+    Wrapper: styled.div` position: relative; min-height: 100vh; background: #050b14; color: #d9e6f4; `,
+    Header: styled.header`
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 50;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 10px clamp(16px, 3vw, 32px);
+        border-bottom: 1px solid rgba(142, 171, 205, 0.2);
+        background: rgba(5, 11, 20, 0.94);
+        backdrop-filter: blur(16px);
+    `,
+    Brand: styled.a`
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        color: #f4f8fc;
+        text-decoration: none;
+        &:hover .brandTitle, &:focus-visible .brandTitle { text-shadow: 0 0 14px rgba(121, 184, 255, 0.55); }
+        &:focus-visible { outline: 2px solid #79b8ff; outline-offset: 4px; }
+    `,
+    BrandLogo: styled.img`
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+        flex: 0 0 auto;
+        border: 1px solid rgba(142, 171, 205, 0.35);
+        border-radius: 12px;
+        background: #0c1a2b;
+    `,
+    BrandCopy: styled.span` display: grid; min-width: 0; gap: 1px; `,
+    BrandKicker: styled.span` color: #79b8ff; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; `,
+    BrandTitle: styled.span.attrs({ className: "brandTitle" })` overflow: hidden; color: #f4f8fc; font-family: "Antonio", sans-serif; font-size: clamp(17px, 2.4vw, 23px); text-overflow: ellipsis; white-space: nowrap; transition: text-shadow 180ms ease; `,
+    NavLinkWrapper: styled.button`
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        color: #d9e6f4;
+        background: #0c1a2b;
+        border: 1px solid rgba(142, 171, 205, 0.32);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        &:hover, &:focus-visible { color: #79b8ff; border-color: #79b8ff; box-shadow: 0 0 18px rgba(64, 139, 220, 0.2); outline: none; }
+        svg { width: 20px; height: 20px; }
+    `,
+    Main: styled.div` height: 100vh; padding-top: 70px; display: flex; align-items: stretch; overflow: hidden; `,
+    NavWrapper: styled.aside`
+        width: 0;
+        flex: 0 0 0;
+        overflow: hidden;
+        z-index: 40;
+        background: #07101d;
+        border-right: 1px solid rgba(142, 171, 205, 0.18);
+        transition: width 180ms ease, flex-basis 180ms ease;
+        &.active { width: 270px; flex-basis: 270px; }
+        .navInner { width: 270px; height: 100%; padding: 18px 14px; overflow-y: auto; scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: rgba(142, 171, 205, 0.35) transparent; &::-webkit-scrollbar { width: 10px; height: 10px; } &::-webkit-scrollbar-thumb { background: rgba(142, 171, 205, 0.28); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; } }
+        @media (max-width: 1000px) {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: calc(100vh - 70px);
+            box-shadow: 18px 0 45px rgba(0, 0, 0, 0.25);
+        }
+    `,
+    ContentWrapper: styled.section`
+        width: 100%;
+        min-width: 0;
+        overflow: auto;
+        scroll-behavior: smooth;
+        scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: rgba(142, 171, 205, 0.35) transparent; &::-webkit-scrollbar { width: 10px; height: 10px; } &::-webkit-scrollbar-thumb { background: rgba(142, 171, 205, 0.28); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; }
+    `,
+    RoutesWrapper: styled.div` min-height: 100%; `,
+    Loading: styled.div` min-height: 60vh; display: grid; place-content: center; justify-items: center; gap: 10px; color: #9eb3ca; `,
+    Footer: styled.div` padding: 0 20px 20px; `,
 };

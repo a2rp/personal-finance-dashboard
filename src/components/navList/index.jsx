@@ -1,39 +1,37 @@
-import { NavLink, useLocation } from "react-router-dom";
+﻿import React from "react";
 import { useEffect, useRef } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { FiCreditCard, FiHome, FiList, FiPieChart, FiTarget } from "react-icons/fi";
 import { Styled } from "./styled";
 
-const NavListCore = () => {
+const links = [
+    { to: "/home", label: "Home", icon: FiHome },
+    { to: "/overview", label: "Overview", icon: FiPieChart },
+    { to: "/transactions", label: "Transactions", icon: FiList },
+    { to: "/accounts", label: "Accounts", icon: FiCreditCard },
+    { to: "/envelopes", label: "Envelopes", icon: FiTarget },
+];
+
+export default function NavList() {
     const navRef = useRef(null);
     const { pathname } = useLocation();
 
-    // Keep the active NavLink centered/visible in the sidebar
     useEffect(() => {
-        const el = navRef.current?.querySelector("a.active");
-        if (!el) return;
-
-        // small delay so NavLink receives the .active class after route update
-        const id = requestAnimationFrame(() => {
-            try {
-                el.scrollIntoView({ block: "center", inline: "nearest", behavior: "smooth" });
-            } catch {
-                // older browsers fallback
-                el.scrollIntoView();
-            }
-        });
-        return () => cancelAnimationFrame(id);
+        const active = navRef.current?.querySelector("a.active");
+        if (!active) return;
+        const frame = requestAnimationFrame(() => active.scrollIntoView({ block: "center", inline: "nearest", behavior: "smooth" }));
+        return () => cancelAnimationFrame(frame);
     }, [pathname]);
 
     return (
-        <Styled.Nav ref={navRef} aria-label="JavaScript Core navigation">
-            <h3 style={{ margin: 0 }}>
-                <NavLink to="/home" title="Home" style={{ display: "block", padding: 0, margin: 0 }}>Home</NavLink>
-                <NavLink to="/overview" title="Overview" style={{ display: "block", padding: 0, margin: 0 }}>Overview</NavLink>
-                <NavLink to="/transactions" title="Transactions" style={{ display: "block", padding: 0, margin: 0 }}>Transactions</NavLink>
-                <NavLink to="/accounts" title="accounts" style={{ display: "block", padding: 0, margin: 0 }}>Accounts</NavLink>
-                <NavLink to="/envelopes" title="Envelopes" style={{ display: "block", padding: 0, margin: 0 }}>Envelopes</NavLink>
-            </h3>
+        <Styled.Nav ref={navRef} aria-label="Dashboard navigation">
+            <Styled.NavKicker>WORKSPACE</Styled.NavKicker>
+            {links.map(({ to, label, icon: Icon }) => (
+                <Styled.NavItem key={to} as={NavLink} to={to} className={({ isActive }) => (isActive ? "active" : "")}>
+                    {React.createElement(Icon, { "aria-hidden": "true" })}
+                    <span>{label}</span>
+                </Styled.NavItem>
+            ))}
         </Styled.Nav>
     );
-};
-
-export default NavListCore;
+}

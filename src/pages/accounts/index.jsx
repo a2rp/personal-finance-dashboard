@@ -1,4 +1,4 @@
-// src/pages/accounts/index.jsx
+﻿// src/pages/accounts/index.jsx
 import { useMemo, useState } from "react";
 import { Styled } from "./styled";
 import Modal from "../../components/modal/index.jsx";
@@ -8,7 +8,7 @@ export default function Accounts() {
     const [version, setVersion] = useState(0);
 
     // read state
-    const state = useMemo(() => getState(), [version]);
+    const state = useMemo(() => { void version; return getState(); }, [version]);
     const { accounts = [], transactions = [], settings = {} } = state;
     const { currency = "INR", locale = "en-IN" } = settings;
 

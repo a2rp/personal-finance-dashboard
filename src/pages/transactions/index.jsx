@@ -1,4 +1,4 @@
-// src/pages/transactions/index.jsx
+﻿// src/pages/transactions/index.jsx
 import { useEffect, useMemo, useState } from "react";
 import { Styled } from "./styled";
 import Modal from "../../components/modal/index.jsx";
@@ -53,7 +53,7 @@ export default function Transactions() {
     const [sortDir, setSortDir] = useState("desc");
 
     // re-read state whenever version changes
-    const state = useMemo(() => getState(), [version]);
+    const state = useMemo(() => { void version; return getState(); }, [version]);
     const { transactions = [], accounts = [], envelopes = [], settings = {} } = state;
     const { currency = "INR", locale = "en-IN" } = settings;
 
@@ -372,11 +372,11 @@ export default function Transactions() {
             <Styled.HeaderBar>
                 <div>
                     <Styled.Title>Transactions</Styled.Title>
-                    <Styled.Subtitle>Month — {monthLabel}</Styled.Subtitle>
+                    <Styled.Subtitle>Month - {monthLabel}</Styled.Subtitle>
                 </div>
 
                 <Styled.Actions>
-                    {/* Month navigation — Prev • Month • Next (with selects) */}
+                    {/* Month navigation - Prev • Month • Next (with selects) */}
                     <div
                         className="month-nav"
                         style={{
@@ -386,7 +386,7 @@ export default function Transactions() {
                             marginRight: 12,
                         }}
                     >
-                        <Styled.Button type="button" variant="ghost" onClick={prevMonth} aria-label="Previous month">‹</Styled.Button>
+                        <Styled.Button type="button" variant="ghost" onClick={prevMonth} aria-label="Previous month">Prev</Styled.Button>
 
                         <div style={{ display: "inline-flex", gap: 8 }}>
                             <select
@@ -429,13 +429,13 @@ export default function Transactions() {
                             </select>
                         </div>
 
-                        <Styled.Button type="button" variant="ghost" onClick={nextMonth} aria-label="Next month">›</Styled.Button>
+                        <Styled.Button type="button" variant="ghost" onClick={nextMonth} aria-label="Next month">Next</Styled.Button>
                     </div>
 
                     <Styled.Button variant="primary" onClick={openTx}>New Transaction</Styled.Button>
                     <Styled.Button onClick={exportCsv}>Export CSV</Styled.Button>
-                    <Styled.Button variant="ghost" onClick={addSampleIncome}>+ Add ₹1,200 Income</Styled.Button>
-                    <Styled.Button variant="ghost" onClick={addSampleExpense}>+ Add -₹250 Expense</Styled.Button>
+                    <Styled.Button variant="ghost" onClick={addSampleIncome}>+ Add INR 1,200 Income</Styled.Button>
+                    <Styled.Button variant="ghost" onClick={addSampleExpense}>+ Add -INR 250 Expense</Styled.Button>
                     <Styled.Button onClick={openClearModal}>Clear This Month</Styled.Button>
                 </Styled.Actions>
             </Styled.HeaderBar>
@@ -444,7 +444,7 @@ export default function Transactions() {
             <Styled.FilterBar>
                 <Styled.Control
                     aria-label="Search"
-                    placeholder="Search note, account, envelope, amount, date…"
+                    placeholder="Search note, account, envelope, amount, date..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
@@ -549,8 +549,8 @@ export default function Transactions() {
                                     <tr key={t.id}>
                                         <td>{t.date?.slice(0, 10) || "-"}</td>
                                         <td>{type}</td>
-                                        <td>{accName[t.accountId] || "—"}</td>
-                                        <td>{envName[t.envelopeId] || "—"}</td>
+                                        <td>{accName[t.accountId] || "-"}</td>
+                                        <td>{envName[t.envelopeId] || "-"}</td>
                                         <td style={{ textAlign: "right", color: (t.amount || 0) < 0 ? "crimson" : "seagreen" }}>
                                             {fmt(Math.abs(t.amount || 0))}
                                         </td>
@@ -600,7 +600,7 @@ export default function Transactions() {
                     </>
                 }
             >
-                <p>This action can’t be undone.</p>
+                <p>This action can't be undone.</p>
             </Modal>
 
             {/* Delete transaction modal */}
@@ -684,7 +684,7 @@ export default function Transactions() {
                     <Styled.Field>
                         Envelope (optional)
                         <Styled.Select name="envelopeId" value={form.envelopeId} onChange={handleChange}>
-                            <option value="">— None —</option>
+                            <option value="">- None -</option>
                             {envelopes.map((e) => (
                                 <option key={e.id} value={e.id}>{e.name}</option>
                             ))}
