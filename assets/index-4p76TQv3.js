@@ -1,4 +1,4 @@
-import{d as a,l as A,r as d,j as e}from"./index-TVLhC0zA.js";import{M as O}from"./index-DZkCCCyK.js";import{g as x,s as y,c as Q}from"./local-EGMl4JfI.js";const X=(...i)=>({shouldForwardProp:h=>!i.includes(h)}),n={Page:a.div`
+import{d as a,l as A,r as d,j as e}from"./index-VamBxkA2.js";import{M as O}from"./index-DPiAOIPr.js";import{g as x,s as y,c as Q}from"./local-EGMl4JfI.js";const X=(...i)=>({shouldForwardProp:h=>!i.includes(h)}),n={Page:a.div`
         min-height: 100dvh;
         background: var(--bg);
         color: var(--text);
