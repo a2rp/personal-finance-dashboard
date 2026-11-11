@@ -2,42 +2,38 @@
     "name": "personal-finance-dashboard",
     "private": true,
     "version": "1.0.0",
+    "description": "Browser-based personal finance dashboard for tracking transactions, accounts, budgets, and monthly spending.",
     "type": "module",
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "predeploy": "npm run build && copy dist\\index.html dist\\404.html",
+        "predeploy": "npm run build && node -e \"require('node:fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
         "deploy": "npx gh-pages -d dist -b gh-pages"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
         "@mui/material": "^7.3.2",
-        "dexie": "^4.2.0",
-        "jsqr": "^1.4.0",
-        "papaparse": "^5.5.3",
-        "qrcode": "^1.5.4",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
+        "react": "^19.3.0",
+        "react-dom": "^19.3.0",
         "react-icons": "^5.5.0",
         "react-router-dom": "^6.30.1",
         "react-toastify": "^11.0.5",
-        "react-window": "^2.1.0",
         "recharts": "^3.2.1",
-        "styled-components": "^6.1.19",
-        "zustand": "^5.0.8"
+        "styled-components": "^6.1.19"
     },
     "devDependencies": {
-        "@eslint/js": "^9.25.0",
-        "@types/react": "^19.1.2",
-        "@types/react-dom": "^19.1.2",
-        "@vitejs/plugin-react": "^4.4.1",
-        "eslint": "^9.25.0",
-        "eslint-plugin-react-hooks": "^5.2.0",
-        "eslint-plugin-react-refresh": "^0.4.19",
-        "globals": "^16.0.0",
-        "vite": "^6.3.5"
+        "@eslint/js": "^10.0.1",
+        "@vitejs/plugin-react": "^6.3.0",
+        "eslint": "^10.14.0",
+        "eslint-plugin-react-hooks": "^7.1.1",
+        "eslint-plugin-react-refresh": "^0.5.7",
+        "globals": "^17.12.0",
+        "vite": "^8.3.7"
     }
 }

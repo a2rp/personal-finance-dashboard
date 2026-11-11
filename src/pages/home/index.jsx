@@ -11,12 +11,12 @@ const Home = () => {
     return (
         <>
             <Styled.Wrapper>
-                <h3>Personal Finance Dashboard - last updated: Sep 17, 2025</h3>
+                <h3>Personal Finance Dashboard</h3>
 
                 <fieldset>
                     <legend>About Project</legend>
                     <div className='para'>
-                        Personal Finance Dashboard is a fast, privacy-first budgeting app built with React + styled-components. Plan envelopes, track transactions, visualize spend, and import/export CSV-all offline, no backend, your data stays on your device.
+                        Plan envelopes, track transactions, review monthly spending, and export CSV files. This app has no backend; your data stays in this browser's LocalStorage.
                     </div>
                     <div className="points">
                         <ul className='mainList'>
@@ -24,7 +24,7 @@ const Home = () => {
                                 <h2 className='heading'>What this is</h2>
                                 <ul>
                                     <li>A fast, frontend-only personal finance dashboard built with React + styled-components.</li>
-                                    <li>Privacy-first: no backend; all data lives in your browser's localStorage.</li>
+                                    <li>Local-first: no backend or account sync. Browser LocalStorage is not encrypted, so avoid storing bank credentials or other highly sensitive information.</li>
                                 </ul>
                             </li>
                             <li className='listBlock'>
@@ -52,14 +52,14 @@ const Home = () => {
                                 <ul>
                                     <li>Transactions use positive amounts for income and negative for expenses.</li>
                                     <li>KPIs are computed per selected month; Remaining Budget equals total envelope budgets minus monthly expense and can become Overspent.</li>
-                                    <li>Everything is persisted to localStorage; refresh-safe and works offline.</li>
+                                    <li>Data is stored in LocalStorage and remains available offline. If browser storage is blocked or full, changes stay in memory for this session and a warning appears.</li>
                                 </ul>
                             </li>
                             <li className='listBlock'>
                                 <h2 className='heading'>Tech stack</h2>
                                 <ul>
-                                    <li>React 18, Vite, styled-components, React Router 6</li>
-                                    <li>Recharts (charts), react-toastify (toasts), react-icons (icons)</li>
+                                    <li>React 19, Vite 8, styled-components, React Router 6, and Material UI</li>
+                                    <li>Recharts (charts), React Toastify (notifications), and React Icons</li>
                                 </ul>
                             </li>
                             <li className='listBlock'>

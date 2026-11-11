@@ -1,5 +1,5 @@
 ﻿// src/pages/transactions/index.jsx
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Styled } from "./styled";
 import Modal from "../../components/modal/index.jsx";
 import { getState, saveState, addTransaction } from "../../data/local.js";
@@ -98,22 +98,6 @@ export default function Transactions() {
         note: "",
     });
     const [error, setError] = useState("");
-
-    useEffect(() => {
-        if (!txOpen) {
-            setForm((f) => ({ ...f, date: defaultDateForMonth }));
-        }
-    }, [defaultDateForMonth, txOpen]);
-
-    // default selects when modal opens
-    useEffect(() => {
-        if (!txOpen) return;
-        setForm((f) => ({
-            ...f,
-            accountId: f.accountId || accounts[0]?.id || "",
-            envelopeId: f.envelopeId || envelopes[0]?.id || "",
-        }));
-    }, [txOpen, accounts, envelopes]);
 
     const fmt = (n) =>
         new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }).format(n || 0);

@@ -1,8 +1,11 @@
 // src/data/local.js
-// Ultra-simple localStorage “DB” with a few helpers.
-// No external deps. Everything is synchronous & tiny.
+// Small synchronous local-first store.
+import { toast } from "react-toastify";
 
 const KEY = "pfd.v1";
+let memoryState = null;
+let storageUnavailable = false;
+let storageWarningShown = false;
 
 // utils
 const now = () => new Date().toISOString();
@@ -64,24 +67,68 @@ function defaultState() {
 }
 
 // ---- core read/write ----
-function read() {
+const isRecord = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+
+const isValidState = (state) => isRecord(state) && isRecord(state.settings) &&
+    Array.isArray(state.accounts) && state.accounts.every(isRecord) &&
+    Array.isArray(state.envelopes) && state.envelopes.every(isRecord) &&
+    Array.isArray(state.transactions) && state.transactions.every(isRecord);
+
+function warnStorage() {
+    if (storageWarningShown) return;
+    storageWarningShown = true;
     try {
-        const raw = localStorage.getItem(KEY);
-        if (!raw) {
-            const seed = defaultState();
-            localStorage.setItem(KEY, JSON.stringify(seed));
-            return seed;
-        }
-        return JSON.parse(raw);
+        queueMicrotask(() => {
+            try {
+                toast.warning("Browser storage is unavailable. Changes will only last for this session.", { toastId: "pfd-storage-warning" });
+            } catch {
+                // Keep the in-memory fallback usable if notifications are unavailable.
+            }
+        });
     } catch {
-        const seed = defaultState();
-        localStorage.setItem(KEY, JSON.stringify(seed));
-        return seed;
+        // Keep the in-memory fallback usable if notifications are unavailable.
     }
 }
 
 function write(state) {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    memoryState = state;
+    try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+        storageUnavailable = false;
+        storageWarningShown = false;
+        return true;
+    } catch {
+        storageUnavailable = true;
+        warnStorage();
+        return false;
+    }
+}
+
+function read() {
+    if (storageUnavailable && memoryState) return memoryState;
+    try {
+        const raw = localStorage.getItem(KEY);
+        if (!raw) {
+            const seed = defaultState();
+            write(seed);
+            return seed;
+        }
+
+        const parsed = JSON.parse(raw);
+        if (isValidState(parsed)) {
+            memoryState = parsed;
+            return parsed;
+        }
+
+        const seed = defaultState();
+        write(seed);
+        return seed;
+    } catch {
+        storageUnavailable = true;
+        if (!memoryState) memoryState = defaultState();
+        warnStorage();
+        return memoryState;
+    }
 }
 
 // ---- simple API you can call from pages ----

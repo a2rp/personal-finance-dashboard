@@ -1,9 +1,12 @@
 // src/utils/csv.js
 
 // Escape a single CSV cell
-function esc(v) {
+function esc(v, { spreadsheetSafe = false } = {}) {
     if (v === null || v === undefined) return "";
-    const s = String(v);
+    let s = String(v);
+    if (spreadsheetSafe && /^\s*[=+\-@]/.test(s)) {
+        s = `'${s}`;
+    }
     // Quote if it contains comma, quote, newline, or leading/trailing spaces
     if (/[",\r\n]|^\s|\s$/.test(s)) {
         return `"${s.replace(/"/g, '""')}"`;
@@ -102,7 +105,9 @@ export function exportTransactionsCSV(state, opts = {}) {
         ]);
     }
 
-    const csv = rows.map((r) => r.map(esc).join(",")).join("\r\n");
+    const csv = rows.map((row, rowIndex) => row.map((cell, columnIndex) => esc(cell, {
+        spreadsheetSafe: rowIndex > 0 && columnIndex !== 3,
+    })).join(",")).join("\r\n");
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
 
     const name = filename || `transactions-${month || "all"}.csv`;

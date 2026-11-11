@@ -1,6 +1,6 @@
 ﻿# Personal Finance Dashboard
 
-A responsive frontend-only finance dashboard built with React. Track transactions, review monthly KPIs, manage accounts and envelopes, view charts, and export CSV data while keeping state in browser storage.
+A responsive, client-side finance dashboard for tracking transactions, accounts, and envelope budgets, reviewing monthly charts and KPIs, and exporting transactions to CSV.
 
 ![Personal Finance Dashboard preview](screenshot.png)
 
@@ -14,20 +14,24 @@ A responsive frontend-only finance dashboard built with React. Track transaction
 
 ## Tech stack
 
-React, Vite, React Router, styled-components, Material UI, Recharts, Zustand, Dexie, and LocalStorage.
+React 19, Vite 8, React Router, Material UI, styled-components, Recharts, React Toastify, and browser LocalStorage.
 
 ## Run locally
 
+Requirements: Node.js 20.19+ or 22.12+ and npm.
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Run `npm run lint` and `npm run build` before publishing. Deploy with `npm run deploy`.
+Run `npm run lint` and `npm run build` before publishing. `npm run deploy` creates the GitHub Pages route fallback and publishes the production build.
 
 Live URL: [a2rp.github.io/personal-finance-dashboard](https://a2rp.github.io/personal-finance-dashboard/)
 
-All data stays in the browser. This project has no backend.
+## Data and privacy
+
+The dashboard has no backend or account system. Finance data is stored in this browser's LocalStorage, which is not encrypted by this app and can be read by someone with access to the browser profile. Avoid entering bank credentials or other highly sensitive information, and treat downloaded CSV files as private. If browser storage is blocked or full, the app keeps changes in memory for the current session and shows a warning; those changes will not survive a refresh.
 
 ## Links
 
